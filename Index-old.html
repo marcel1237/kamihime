@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kamihime Wiki</title>
+  <style>
+    :root {
+      --bg: #0b0e1a;
+      --panel: #14183a;
+      --panel-2: #1a1f55;
+      --primary: #8aa2ff;
+      --secondary: #ff9bd5;
+      --accent: #ffd27a;
+      --text: #eef0ff;
+      --muted: #aab0ff;
+      --border: #2a2f66;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1b1f6a, transparent), var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #15196b, #0d1030);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.4rem;
+      color: var(--primary);
+    }
+
+    header p {
+      margin: 6px 0 14px;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    nav button.active,
+    nav button:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .search-box {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 20px;
+      padding: 24px;
+    }
+
+    aside {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      height: fit-content;
+    }
+
+    aside h3 {
+      margin-top: 0;
+      color: var(--secondary);
+    }
+
+    aside ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    aside li {
+      padding: 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    aside li:hover {
+      background: var(--panel-2);
+      color: var(--accent);
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 20px;
+    }
+
+    section h2 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #11154a;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--secondary);
+    }
+
+    .card h4 {
+      margin: 0 0 6px;
+      color: var(--secondary);
+    }
+
+    .hidden { display: none; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      cursor: pointer;
+      color: var(--accent);
+    }
+
+    tr:hover { background: var(--panel-2); }
+
+    .tier-ss { color: #ffd700; }
+    .tier-s { color: #ff9b00; }
+    .tier-a { color: #7cff7c; }
+    .tier-b { color: #7caaff; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Kamihime Wiki</h1>
+  <p>Wiki não oficial completa de Kamihime Project R</p>
+
+  <nav>
+    <button class="active" onclick="showSection('home')">Home</button>
+    <button onclick="showSection('kamihimes')">Kamihimes</button>
+    <button onclick="showSection('weapons')">Armas</button>
+    <button onclick="showSection('souls')">Souls</button>
+    <button onclick="showSection('guides')">Guias</button>
+    <button onclick="showSection('events')">Eventos</button>
+  </nav>
+
+  <div class="search-box">
+    <input id="search" type="text" placeholder="Buscar Kamihime, arma, soul..." oninput="searchAll()" />
+  </div>
+</header>
+
+<main>
+  <aside>
+    <h3>Filtros</h3>
+    <ul>
+      <li>🔥 Fire</li>
+      <li>💧 Water</li>
+      <li>🌪 Wind</li>
+      <li>⚡ Thunder</li>
+      <li>✨ Light</li>
+      <li>🌑 Dark</li>
+      <li>SSR / SR / R</li>
+      <li>Awakening</li>
+      <li>Heavenly Awakening</li>
+    </ul>
+  </aside>
+
+  <section id="home">
+    <h2>Destaques</h2>
+    <div class="cards">
+      <div class="card"><h4>Tier List Atual</h4><p>Meta atual de Kamihimes e armas.</p></div>
+      <div class="card"><h4>Top Gacha Weapons</h4><p>Ranking das melhores armas do jogo.</p></div>
+      <div class="card"><h4>Guias Avançados</h4><p>Builds, grids e otimização.</p></div>
+    </div>
+  </section>
+
+  <section id="kamihimes" class="hidden">
+    <h2>Kamihimes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">Nome</th>
+          <th onclick="sortTable(1)">Elemento</th>
+          <th onclick="sortTable(2)">Tier</th>
+        </tr>
+      </thead>
+      <tbody id="kamiTable">
+        <tr><td>Amaterasu</td><td>✨ Light</td><td class="tier-ss">SS</td></tr>
+        <tr><td>Athena</td><td>🔥 Fire</td><td class="tier-s">S</td></tr>
+        <tr><td>Thor</td><td>⚡ Thunder</td><td class="tier-a">A</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="weapons" class="hidden">
+    <h2>Armas</h2>
+    <p>Rankings de gacha, EX weapons e sample skills.</p>
+  </section>
+
+  <section id="souls" class="hidden">
+    <h2>Souls</h2>
+    <p>Souls, Soul Weapons e usos estratégicos.</p>
+  </section>
+
+  <section id="guides" class="hidden">
+    <h2>Guias</h2>
+    <p>Conteúdo avançado sobre meta, grids e otimização.</p>
+  </section>
+
+  <section id="events" class="hidden">
+    <h2>Eventos</h2>
+    <p>Eventos atuais e passados.</p>
+  </section>
+</main>
+
+<footer>
+  Kamihime Wiki © 2025 — Projeto comunitário
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  function searchAll() {
+    const q = document.getElementById('search').value.toLowerCase();
+    document.querySelectorAll('tbody tr').forEach(tr => {
+      tr.style.display = tr.innerText.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+
+  function sortTable(col) {
+    const table = document.getElementById('kamiTable');
+    const rows = Array.from(table.rows);
+    const asc = table.dataset.sort !== 'asc';
+    rows.sort((a, b) => a.cells[col].innerText.localeCompare(b.cells[col].innerText));
+    if (!asc) rows.reverse();
+    table.dataset.sort = asc ? 'asc' : 'desc';
+    rows.forEach(r => table.appendChild(r));
+  }
+</script>
+
+</body>
+</html>

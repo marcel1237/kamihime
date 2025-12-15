@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamihime Wiki — Definitiva</title>
+
+<style>
+:root{
+  --bg:#090b18;
+  --panel:#12163a;
+  --panel2:#1b2060;
+  --primary:#8aa2ff;
+  --secondary:#ff9bd5;
+  --accent:#ffd27a;
+  --text:#eef0ff;
+  --muted:#9aa2ff;
+  --border:#2a2f66;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,Segoe UI,Roboto,Ubuntu;
+  background:radial-gradient(1200px 600px at 10% -10%,#1b1f6a,transparent),var(--bg);
+  color:var(--text)
+}
+header{
+  padding:26px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,#15196b,#0b0e2e)
+}
+h1{margin:0;font-size:2.6rem;color:var(--primary)}
+header p{margin:6px 0 14px;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:10px}
+nav button{
+  background:var(--panel);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:9px 16px;
+  border-radius:14px;
+  cursor:pointer;
+}
+nav button.active,nav button:hover{
+  border-color:var(--primary);
+  color:var(--primary)
+}
+.search input{
+  width:100%;
+  padding:12px 16px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  margin-top:14px
+}
+main{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:22px;
+  padding:26px
+}
+aside{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px;
+  height:fit-content
+}
+aside h3{margin-top:0;color:var(--secondary)}
+.filter span{
+  display:inline-block;
+  padding:6px 10px;
+  margin:4px;
+  border-radius:12px;
+  background:var(--panel2);
+  cursor:pointer
+}
+.filter span.active{
+  background:var(--primary);
+  color:#000
+}
+section{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:26px;
+  padding:22px
+}
+.hidden{display:none}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:14px
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid var(--border)
+}
+th{
+  cursor:pointer;
+  color:var(--accent)
+}
+tr:hover{background:var(--panel2)}
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:10px;
+  background:var(--panel2);
+  margin-right:6px;
+  font-size:.85rem
+}
+.tier-SS{color:#ffd700}
+.tier-S{color:#ff9b00}
+.tier-A{color:#7cff7c}
+.tier-B{color:#7caaff}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px
+}
+.card{
+  background:#0f1348;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px
+}
+footer{
+  text-align:center;
+  padding:24px;
+  color:var(--muted);
+  border-top:1px solid var(--border)
+}
+@media(max-width:900px){
+  main{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Kamihime Wiki</h1>
+  <p>A Wiki definitiva de Kamihime Project R</p>
+
+  <nav>
+    <button class="active" onclick="navTo('home',this)">Home</button>
+    <button onclick="navTo('kamihimes',this)">Kamihimes</button>
+    <button onclick="navTo('meta',this)">Meta</button>
+  </nav>
+
+  <div class="search">
+    <input id="search" placeholder="Buscar Kamihime..." oninput="searchAll()">
+  </div>
+</header>
+
+<main>
+
+<aside>
+  <h3>Elemento</h3>
+  <div class="filter" id="elementFilter"></div>
+</aside>
+
+<section id="home">
+  <h2>Destaques</h2>
+  <div class="cards">
+    <div class="card">Tier List Atual</div>
+    <div class="card">Meta Analyzer</div>
+    <div class="card">Builds Recomendadas</div>
+  </div>
+</section>
+
+<section id="kamihimes" class="hidden">
+  <h2>Kamihimes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)">Nome</th>
+        <th onclick="sortTable(1)">Elemento</th>
+        <th onclick="sortTable(2)">Tier</th>
+      </tr>
+    </thead>
+    <tbody id="kamiTable"></tbody>
+  </table>
+</section>
+
+<section id="meta" class="hidden">
+  <h2>Meta Analyzer</h2>
+  <select id="metaSelect" multiple style="width:100%;height:120px"></select>
+  <button onclick="runMeta()" style="margin-top:12px">Simular</button>
+  <div id="metaResult" style="margin-top:12px"></div>
+</section>
+
+</main>
+
+<footer>
+Kamihime Wiki © 2025 — Projeto comunitário
+</footer>
+
+<script>
+const kamihimes=[
+  {id:'amaterasu',name:'Amaterasu',element:'Light',tier:'SS'},
+  {id:'athena',name:'Athena',element:'Fire',tier:'S'},
+  {id:'thor',name:'Thor',element:'Thunder',tier:'A'}
+];
+
+const active={element:null};
+
+function navTo(id,btn){
+  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function renderFilters(){
+  const ef=document.getElementById('elementFilter');
+  [...new Set(kamihimes.map(k=>k.element))].forEach(e=>{
+    const s=document.createElement('span');
+    s.textContent=e;
+    s.onclick=()=>{active.element=e;renderTable()};
+    ef.appendChild(s);
+  });
+}
+
+function renderTable(){
+  const tb=document.getElementById('kamiTable');
+  tb.innerHTML='';
+  kamihimes
+    .filter(k=>!active.element||k.element===active.element)
+    .forEach(k=>{
+      tb.innerHTML+=`
+      <tr onclick="location.hash='kamihime/${k.id}'">
+        <td>${k.name}</td>
+        <td>${k.element}</td>
+        <td class="tier-${k.tier}">${k.tier}</td>
+      </tr>`;
+    });
+}
+
+function searchAll(){
+  const q=search.value.toLowerCase();
+  document.querySelectorAll('#kamiTable tr').forEach(r=>{
+    r.style.display=r.innerText.toLowerCase().includes(q)?'':'none';
+  });
+}
+
+function sortTable(c){
+  const tb=document.getElementById('kamiTable');
+  [...tb.rows].sort((a,b)=>a.cells[c].innerText.localeCompare(b.cells[c].innerText))
+    .forEach(r=>tb.appendChild(r));
+}
+
+function initMeta(){
+  const s=document.getElementById('metaSelect');
+  kamihimes.forEach(k=>{
+    const o=document.createElement('option');
+    o.value=k.id;
+    o.textContent=k.name;
+    s.appendChild(o);
+  });
+}
+
+function runMeta(){
+  const sel=[...metaSelect.selectedOptions];
+  const score=sel.reduce((s,o)=>{
+    const k=kamihimes.find(x=>x.id===o.value);
+    return s+(k.tier==='SS'?4:k.tier==='S'?3:2);
+  },0);
+  metaResult.innerHTML=`Score: <b>${score}</b>`;
+}
+
+renderFilters();
+renderTable();
+initMeta();
+</script>
+
+</body>
+</html>

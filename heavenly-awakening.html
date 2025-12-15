@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Kamihime – Heavenly Awakening</title>
+
+<style>
+/* ===========================
+   DESIGN TOKENS
+=========================== */
+:root {
+  --bg-main: #0e0f14;
+  --bg-grad-1: #1a1c29;
+  --bg-grad-2: #0e0f14;
+
+  --glass-bg: rgba(255,255,255,0.08);
+  --glass-border: rgba(255,255,255,0.15);
+
+  --text-main: #eaeaea;
+  --text-muted: #a0a0a0;
+  --accent: #00c6ff;
+
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+  --transition: 0.25s ease;
+}
+
+/* ===========================
+   BASE
+=========================== */
+body {
+  margin: 0;
+  padding: 40px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(circle at top, var(--bg-grad-1), var(--bg-grad-2));
+  color: var(--text-main);
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+/* ===========================
+   CONTROLS
+=========================== */
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+button {
+  background: linear-gradient(135deg, #2b2e4a, #1a1c29);
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+  padding: 8px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button:hover,
+button:focus {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* Search */
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.search-box input {
+  width: 280px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-main);
+}
+
+/* ===========================
+   TABLE WRAPPER
+=========================== */
+.table-wrap {
+  max-width: 1100px;
+  margin: auto;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+th {
+  background: rgba(255,255,255,0.08);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  user-select: none;
+}
+
+th.active {
+  color: var(--accent);
+}
+
+th span {
+  margin-left: 6px;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+tr {
+  transition: background var(--transition);
+}
+
+tr:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+/* ===========================
+   ELEMENT BADGES
+=========================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.fire    { background: linear-gradient(135deg,#ff6b6b,#ff3b3b); }
+.water   { background: linear-gradient(135deg,#4facfe,#00f2fe); }
+.wind    { background: linear-gradient(135deg,#43e97b,#38f9d7); }
+.light   { background: linear-gradient(135deg,#ffe259,#ffa751); }
+.thunder { background: linear-gradient(135deg,#a18cd1,#fbc2eb); }
+.dark    { background: linear-gradient(135deg,#434343,#000000); }
+
+.progress {
+  color: #cce6ff;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 720px) {
+  th:nth-child(3),
+  td:nth-child(3) {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Kamihime Project</h1>
+<div class="subtitle">Heavenly Awakening — UI Standard v2.0</div>
+
+<div class="controls">
+  <button onclick="filterElement('all')">Todos</button>
+  <button onclick="filterElement('Fire')">🔥 Fire</button>
+  <button onclick="filterElement('Water')">💧 Water</button>
+  <button onclick="filterElement('Wind')">🌪 Wind</button>
+  <button onclick="filterElement('Light')">✨ Light</button>
+  <button onclick="filterElement('Thunder')">⚡ Thunder</button>
+  <button onclick="filterElement('Dark')">🌑 Dark</button>
+</div>
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Buscar Kamihime..." onkeyup="searchTable()">
+</div>
+
+<div class="table-wrap">
+<table id="kamihimeTable" aria-label="Kamihime Heavenly Awakening">
+<thead>
+<tr>
+  <th onclick="sortTable(0)">Elemento <span>▲▼</span></th>
+  <th onclick="sortTable(1)">Kamihime <span>▲▼</span></th>
+  <th onclick="sortTable(2)">Progressão <span>▲▼</span></th>
+  <th>Link</th>
+</tr>
+</thead>
+<tbody>
+
+<!-- ROWS -->
+<tr data-element="Fire">
+  <td><div class="badge fire">🔥 Fire</div></td>
+  <td>Amaterasu</td>
+  <td class="progress">Original → Awakened → Heavenly Awakening</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Amaterasu">Wiki</a></td>
+</tr>
+
+<tr data-element="Fire">
+  <td><div class="badge fire">🔥 Fire</div></td>
+  <td>Baal</td>
+  <td class="progress">Original → Heavenly Awakening</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Baal">Wiki</a></td>
+</tr>
+
+<tr data-element="Water">
+  <td><div class="badge water">💧 Water</div></td>
+  <td>Asherah</td>
+  <td class="progress">Original → Awakened → Heavenly Awakening</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Asherah">Wiki</a></td>
+</tr>
+
+<tr data-element="Water">
+  <td><div class="badge water">💧 Water</div></td>
+  <td>Nike</td>
+  <td class="progress">Heavenly Awakening ONLY</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Nike">Wiki</a></td>
+</tr>
+
+<tr data-element="Wind">
+  <td><div class="badge wind">🌪 Wind</div></td>
+  <td>Cu Chulainn</td>
+  <td class="progress">Original → Awakened → Heavenly Awakening</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Cu_Chulainn">Wiki</a></td>
+</tr>
+
+<tr data-element="Wind">
+  <td><div class="badge wind">🌪 Wind</div></td>
+  <td>Cybele</td>
+  <td class="progress">Original → Heavenly Awakening</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Cybele">Wiki</a></td>
+</tr>
+
+<tr data-element="Wind">
+  <td><div class="badge wind">🌪 Wind</div></td>
+  <td>Vishnu</td>
+  <td class="progress">Heavenly Awakening ONLY</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Vishnu">Wiki</a></td>
+</tr>
+
+<tr data-element="Light">
+  <td><div class="badge light">✨ Light</div></td>
+  <td>Artemis</td>
+  <td class="progress">Original → Awakened → Heavenly Awakening</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Artemis">Wiki</a></td>
+</tr>
+
+<tr data-element="Thunder">
+  <td><div class="badge thunder">⚡ Thunder</div></td>
+  <td>Justitia</td>
+  <td class="progress">Original → Heavenly Awakening</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Justitia">Wiki</a></td>
+</tr>
+
+<tr data-element="Dark">
+  <td><div class="badge dark">🌑 Dark</div></td>
+  <td>Amon</td>
+  <td class="progress">Original → Heavenly Awakening</td>
+  <td><a href="https://kamihime-project.fandom.com/wiki/Amon">Wiki</a></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="footer">
+  HTML / UI Standard v2.0 — pronto para produção
+</div>
+
+<script>
+let sortDir = {};
+
+function sortTable(col) {
+  const table = document.getElementById("kamihimeTable");
+  const tbody = table.tBodies[0];
+  const rows = Array.from(tbody.rows);
+
+  sortDir[col] = !sortDir[col];
+  const dir = sortDir[col] ? 1 : -1;
+
+  document.querySelectorAll("th").forEach(th => th.classList.remove("active"));
+  table.tHead.rows[0].cells[col].classList.add("active");
+
+  rows.sort((a, b) => {
+    const A = a.cells[col].innerText.toLowerCase();
+    const B = b.cells[col].innerText.toLowerCase();
+    return A.localeCompare(B) * dir;
+  });
+
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+function filterElement(element) {
+  document.querySelectorAll("#kamihimeTable tbody tr").forEach(row => {
+    row.style.display =
+      element === "all" || row.dataset.element === element ? "" : "none";
+  });
+}
+
+function searchTable() {
+  const value = document.getElementById("searchInput").value.toLowerCase();
+  document.querySelectorAll("#kamihimeTable tbody tr").forEach(row => {
+    row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+  });
+}
+</script>
+
+</body>
+</html>

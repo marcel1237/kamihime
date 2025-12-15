@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Kamihime Project • Drop Rate↑ Units</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --bg-main: linear-gradient(135deg, #0f172a, #020617);
+    --glass-bg: rgba(15, 23, 42, 0.55);
+    --glass-border: rgba(255,255,255,0.08);
+    --text-main: #e5e7eb;
+    --text-muted: #94a3b8;
+    --accent: #38bdf8;
+    --shadow-soft: 0 20px 40px rgba(0,0,0,.4);
+    --radius: 16px;
+    --blur: blur(18px);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* ===== LAYOUT ===== */
+header {
+    padding: 40px 24px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: var(--text-muted);
+    max-width: 720px;
+    margin: auto;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+select, button {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--blur);
+    color: var(--text-main);
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+select:hover, button:hover {
+    border-color: var(--accent);
+}
+
+main {
+    max-width: 1400px;
+    margin: auto;
+    padding: 30px 20px 80px;
+}
+
+/* ===== GRID ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--blur);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(0,0,0,.6);
+}
+
+.card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.card small {
+    color: var(--text-muted);
+}
+
+/* ===== BADGES ===== */
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+}
+
+.fire { background:#dc2626; }
+.water { background:#0284c7; }
+.thunder { background:#facc15; color:#000; }
+.dark { background:#7c3aed; }
+.soul { background:#475569; }
+.kamihime { background:#0ea5e9; }
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: .85rem;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📦 Drop Rate↑ Units</h1>
+    <p>Kamihimes, Souls e Eidolons que aumentam Item Drop Rate. Interface premium, pronta para produção.</p>
+
+    <div class="controls">
+        <select id="filterElement">
+            <option value="all">🌈 Todos os Elementos</option>
+            <option value="fire">🔥 Fire</option>
+            <option value="water">💧 Water</option>
+            <option value="thunder">⚡ Thunder</option>
+            <option value="dark">🌑 Dark</option>
+        </select>
+
+        <select id="filterType">
+            <option value="all">🧩 Todos os Tipos</option>
+            <option value="kamihime">Kamihime</option>
+            <option value="soul">Soul</option>
+        </select>
+
+        <button onclick="sortCards()">🔃 Ordenar A–Z</button>
+    </div>
+</header>
+
+<main>
+    <div class="grid" id="cardGrid">
+
+        <!-- Mammon -->
+        <div class="card" data-name="Mammon" data-element="thunder" data-type="kamihime">
+            <img src="https://static.wikia.nocookie.net/kamihime-project/images/8/87/Youkai_Empress_Mammon.png">
+            <div class="card-content">
+                <h3>Mammon</h3>
+                <small>Lexplander / Aurum • Drop Rate↑</small>
+                <div class="badges">
+                    <span class="badge thunder">⚡ Thunder</span>
+                    <span class="badge kamihime">Kamihime</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skuld -->
+        <div class="card" data-name="Skuld" data-element="fire" data-type="kamihime">
+            <img src="https://static.wikia.nocookie.net/kamihime-project/images/1/1e/Collector_of_Flame_Skuld.png">
+            <div class="card-content">
+                <h3>Skuld</h3>
+                <small>Scrounge / More Please</small>
+                <div class="badges">
+                    <span class="badge fire">🔥 Fire</span>
+                    <span class="badge kamihime">Kamihime</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selene -->
+        <div class="card" data-name="Selene" data-element="dark" data-type="kamihime">
+            <img src="https://static.wikia.nocookie.net/kamihime-project/images/f/f2/Selene.png">
+            <div class="card-content">
+                <h3>Selene</h3>
+                <small>Temble Notice+ • Drop Rate↑</small>
+                <div class="badges">
+                    <span class="badge dark">🌑 Dark</span>
+                    <span class="badge kamihime">Kamihime</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- D'Artagnan -->
+        <div class="card" data-name="DArtagnan" data-element="none" data-type="soul">
+            <img src="https://static.wikia.nocookie.net/kamihime-project/images/9/91/D%27Artagnan.png">
+            <div class="card-content">
+                <h3>D'Artagnan</h3>
+                <small>Snatch / Snatch EX</small>
+                <div class="badges">
+                    <span class="badge soul">Soul</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Billy the Kid -->
+        <div class="card" data-name="Billy" data-element="none" data-type="soul">
+            <img src="https://static.wikia.nocookie.net/kamihime-project/images/3/30/Billy_the_Kid.png">
+            <div class="card-content">
+                <h3>Billy the Kid</h3>
+                <small>Snatch</small>
+                <div class="badges">
+                    <span class="badge soul">Soul</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    Kamihime Project • Drop Rate↑ Database • UI Standard v2.0
+</footer>
+
+<script>
+const grid = document.getElementById("cardGrid");
+let asc = true;
+
+function filterCards() {
+    const el = document.getElementById("filterElement").value;
+    const type = document.getElementById("filterType").value;
+
+    [...grid.children].forEach(card => {
+        const matchEl = el === "all" || card.dataset.element === el;
+        const matchType = type === "all" || card.dataset.type === type;
+        card.style.display = matchEl && matchType ? "flex" : "none";
+    });
+}
+
+function sortCards() {
+    const cards = [...grid.children];
+    cards.sort((a,b) => asc 
+        ? a.dataset.name.localeCompare(b.dataset.name)
+        : b.dataset.name.localeCompare(a.dataset.name)
+    );
+    asc = !asc;
+    cards.forEach(c => grid.appendChild(c));
+}
+
+document.getElementById("filterElement").addEventListener("change", filterCards);
+document.getElementById("filterType").addEventListener("change", filterCards);
+</script>
+
+</body>
+</html>

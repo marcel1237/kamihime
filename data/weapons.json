@@ -1,0 +1,20 @@
+[
+  {
+    "id": "laevateinn",
+    "name": "Laevateinn",
+    "element": "Fire",
+    "type": "Gacha",
+    "tier": "SS",
+    "skills": ["Fire ATK Up", "Burst Damage Up"],
+    "meta_notes": "Uma das melhores armas Fire do jogo."
+  },
+  {
+    "id": "mjolnir",
+    "name": "Mjolnir",
+    "element": "Thunder",
+    "type": "EX",
+    "tier": "S",
+    "skills": ["Thunder ATK Up"],
+    "meta_notes": "Excelente para grids Thunder."
+  }
+]

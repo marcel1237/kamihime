@@ -1,0 +1,18 @@
+[
+  {
+    "id": "dartagnan",
+    "name": "D'Artagnan",
+    "role": "ATK",
+    "tier": "SS",
+    "weapon": "Gun",
+    "meta_notes": "Soul ofensiva dominante no meta."
+  },
+  {
+    "id": "amon",
+    "name": "Amon",
+    "role": "Debuffer",
+    "tier": "S",
+    "weapon": "Staff",
+    "meta_notes": "Ótima para conteúdo de dificuldade alta."
+  }
+]

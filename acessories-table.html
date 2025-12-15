@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kamihime-R — Accessory Series Bonuses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0b0f1a 0%, #121a2f 50%, #0e1324 100%);
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --text-main: #e6e9f2;
+      --text-muted: #a9b0d3;
+      --accent-type: #4da3ff;
+      --accent-unique: #ff9f4d;
+      --accent-hover: #7fb9ff;
+      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.45);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition-fast: 0.25s ease;
+      --transition-slow: 0.45s cubic-bezier(.4,.0,.2,1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    header {
+      padding: 28px 32px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    header h1 {
+      margin: 0 0 8px 0;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-button {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-button:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .filter-button.active {
+      background: rgba(77, 163, 255, 0.25);
+      border-color: var(--accent-type);
+      color: #ffffff;
+    }
+
+    .sort-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .sort-group label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    select {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    select:focus {
+      border-color: var(--accent-hover);
+    }
+
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .series-card {
+      position: relative;
+      padding: 22px 24px 26px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.04)
+      );
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-slow);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .series-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55);
+    }
+
+    .badge {
+      align-self: flex-start;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge.type {
+      background: rgba(77, 163, 255, 0.2);
+      color: var(--accent-type);
+      border: 1px solid rgba(77, 163, 255, 0.35);
+    }
+
+    .badge.unique {
+      background: rgba(255, 159, 77, 0.2);
+      color: var(--accent-unique);
+      border: 1px solid rgba(255, 159, 77, 0.35);
+    }
+
+    .series-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .series-title span.icon {
+      font-size: 1.4rem;
+    }
+
+    .trigger {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .bonus {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #f0f2ff;
+    }
+
+    .tooltip {
+      position: relative;
+      cursor: help;
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
+    }
+
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20, 25, 45, 0.95);
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-fast);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--glass-border);
+    }
+
+    .tooltip:hover::after {
+      opacity: 1;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 22px 20px;
+      }
+
+      .controls {
+        padding: 16px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Kamihime-R — Accessory Series Bonuses</h1>
+      <p>
+        Premium reference of all official <span class="tooltip" data-tooltip="3 accessories of the same Type or Unique series">3-piece accessory set bonuses</span>,
+        organized by Series Category. Built for clarity, comparison, and fast filtering.
+      </p>
+    </header>
+
+    <section class="controls">
+      <div class="filter-group">
+        <button class="filter-button active" data-filter="all">✨ All</button>
+        <button class="filter-button" data-filter="type">🔷 Type Series</button>
+        <button class="filter-button" data-filter="unique">🔥 Unique Series</button>
+      </div>
+
+      <div class="sort-group">
+        <label for="sortSelect">Sort by</label>
+        <select id="sortSelect">
+          <option value="name-asc">Name (A → Z)</option>
+          <option value="name-desc">Name (Z → A)</option>
+        </select>
+      </div>
+    </section>
+
+    <main class="series-grid" id="seriesGrid">
+      <!-- Cards are injected by JavaScript -->
+    </main>
+
+    <footer>
+      Data source: Kamihime Project Wiki — Accessories
+    </footer>
+  </div>
+
+  <script>
+    const seriesData = [
+      {
+        category: "type",
+        badge: "Type series",
+        name: "Bracelet",
+        icon: "💎",
+        trigger: "3 Accessories of Type = Bracelet",
+        bonus: "Follow-up related effects and Normal ATK DMG-oriented bonuses."
+      },
+      {
+        category: "type",
+        badge: "Type series",
+        name: "Brooch",
+        icon: "🛡️",
+        trigger: "3 Brooch accessories",
+        bonus: "Aggro increase, damage cut, and defensive-focused bonuses."
+      },
+      {
+        category: "type",
+        badge: "Type series",
+        name: "Earrings",
+        icon: "⚡",
+        trigger: "3 Earrings",
+        bonus: "Start battle with Burst Gauge and Burst / Limit-related bonuses."
+      },
+      {
+        category: "type",
+        badge: "Type series",
+        name: "Necklace",
+        icon: "✨",
+        trigger: "3 Necklaces",
+        bonus: "Stinger rate, ability damage, and damage limit bonuses."
+      },
+      {
+        category: "type",
+        badge: "Type series",
+        name: "Ring",
+        icon: "💠",
+        trigger: "3 Rings",
+        bonus: "Aggro reduction, gem gain, and team utility effects."
+      },
+      {
+        category: "type",
+        badge: "Type series",
+        name: "Tiara",
+        icon: "👑",
+        trigger: "3 Tiaras",
+        bonus: "Combo attack rate and multi-attack oriented bonuses."
+      },
+      {
+        category: "unique",
+        badge: "Unique series",
+        name: "Normal",
+        icon: "🔹",
+        trigger: "3 Unique: Normal accessories",
+        bonus: "Basic utility effects such as regeneration or simple start-of-battle buffs."
+      },
+      {
+        category: "unique",
+        badge: "Unique series",
+        name: "Ancient",
+        icon: "🏺",
+        trigger: "3 Ancient accessories",
+        bonus: "Ancient-specific special effects, often defensive or utility-focused."
+      },
+      {
+        category: "unique",
+        badge: "Unique series",
+        name: "Devil",
+        icon: "🔥",
+        trigger: "3 Devil accessories",
+        bonus: "Offensive bonuses focusing on ATK, ability damage, and burst damage."
+      },
+      {
+        category: "unique",
+        badge: "Unique series",
+        name: "Angel",
+        icon: "😇",
+        trigger: "3 Angel accessories",
+        bonus: "Critical, ascension, and support-oriented bonuses."
+      }
+    ];
+
+    const grid = document.getElementById("seriesGrid");
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const sortSelect = document.getElementById("sortSelect");
+
+    function renderCards(data) {
+      grid.innerHTML = "";
+      data.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "series-card";
+        card.dataset.category = item.category;
+
+        card.innerHTML = `
+          <span class="badge ${item.category}">
+            ${item.category === "type" ? "🔷" : "🔥"} ${item.badge}
+          </span>
+          <div class="series-title">
+            <span class="icon">${item.icon}</span>
+            ${item.name}
+          </div>
+          <div class="trigger">
+            <strong>Trigger:</strong> ${item.trigger}
+          </div>
+          <div class="bonus">
+            <strong>3-piece bonus:</strong> ${item.bonus}
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function applyFilter(filter) {
+      filterButtons.forEach(btn => btn.classList.remove("active"));
+      document.querySelector(`[data-filter="${filter}"]`).classList.add("active");
+
+      let filteredData = seriesData;
+      if (filter !== "all") {
+        filteredData = seriesData.filter(item => item.category === filter);
+      }
+      applySort(filteredData);
+    }
+
+    function applySort(data) {
+      const value = sortSelect.value;
+      const sorted = [...data].sort((a, b) => {
+        if (value === "name-asc") return a.name.localeCompare(b.name);
+        if (value === "name-desc") return b.name.localeCompare(a.name);
+        return 0;
+      });
+      renderCards(sorted);
+    }
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    sortSelect.addEventListener("change", () => {
+      const activeFilter = document.querySelector(".filter-button.active").dataset.filter;
+      applyFilter(activeFilter);
+    });
+
+    renderCards(seriesData);
+  </script>
+</body>
+</html>

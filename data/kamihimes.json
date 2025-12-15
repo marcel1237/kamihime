@@ -1,0 +1,48 @@
+[
+  {
+    "id": "amaterasu",
+    "name": "Amaterasu",
+    "element": "Light",
+    "rarity": "SSR",
+    "role": ["Buffer", "ATK"],
+    "tier": "SS",
+    "awakening": true,
+    "heavenly": true,
+    "skills": [
+      {
+        "name": "Divine Radiance",
+        "type": "Active",
+        "effect": "Increase party ATK and Burst Gauge"
+      }
+    ],
+    "recommended_build": {
+      "focus": "Support / Burst",
+      "weapons": ["Light ATK", "Burst Bonus"],
+      "souls": ["D'Artagnan"]
+    },
+    "meta_notes": "Top tier no meta Light. Extremamente forte em raids longas."
+  },
+  {
+    "id": "athena",
+    "name": "Athena",
+    "element": "Fire",
+    "rarity": "SSR",
+    "role": ["Defender", "Debuffer"],
+    "tier": "S",
+    "awakening": true,
+    "heavenly": false,
+    "skills": [
+      {
+        "name": "Aegis Flame",
+        "type": "Active",
+        "effect": "Reduce enemy ATK and increase party DEF"
+      }
+    ],
+    "recommended_build": {
+      "focus": "Survivability",
+      "weapons": ["Fire DEF", "HP"],
+      "souls": ["Amon"]
+    },
+    "meta_notes": "Excelente para conteúdo difícil e eventos."
+  }
+]

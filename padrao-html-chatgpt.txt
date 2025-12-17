@@ -1,0 +1,53 @@
+Siga OBRIGATORIAMENTE este HTML / UI STANDARD v2.0 NA CONVERSA:
+
+ARQUITETURA
+- Gere um arquivo HTML completo (<!DOCTYPE html> até </html>)
+- Todo CSS deve estar em <style> no <head>
+- Todo JavaScript deve estar em <script> no final do <body>
+- Não use frameworks externos (React, Vue, Bootstrap, jQuery, etc.)
+- Use apenas HTML5 + CSS3 + JavaScript moderno (ES6+)
+
+DESIGN (NÍVEL PRODUÇÃO)
+- Tema escuro por padrão
+- Fundo com gradiente sofisticado
+- Uso de glassmorphism (blur + transparência)
+- Componentes com sombra suave e profundidade real
+- Layout elegante, moderno e profissional
+- Nada de HTML simples ou aparência “básica”
+
+UI / UX
+- Interface responsiva (desktop, tablet, mobile)
+- Estados visuais: hover, active, focus
+- Feedback visual suave (transições, animações leves)
+- Tipografia limpa e hierárquica
+- Espaçamentos consistentes (grid / rhythm)
+
+COMPONENTES
+- Tabelas avançadas ou cards premium (nunca tabelas simples)
+- Badges visuais com cores semânticas
+- Ícones integrados (emoji ou SVG inline)
+- Cabeçalhos interativos (ordenar, filtrar, destacar)
+- Tooltips ou microinterações quando fizer sentido
+
+INTERATIVIDADE
+- JavaScript vanilla (sem dependências)
+- Filtros dinâmicos
+- Ordenação crescente/decrescente
+- Código JS organizado e legível
+- Funções reutilizáveis
+
+QUALIDADE DE CÓDIGO
+- Código bem indentado
+- Nomes de classes e funções semânticos
+- Comentários apenas quando agregarem clareza
+- Não simplificar o HTML ou CSS
+- Prefira código mais longo e bonito ao minimalismo pobre
+
+ENTREGA
+- Tudo em um único arquivo HTML
+- Pronto para produção
+- Pronto para GitHub Pages / Wiki / Painel
+- Não explique o básico
+- Não resuma o código
+
+Se algo não puder ser feito, explique o motivo técnico.

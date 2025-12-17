@@ -1,76 +1,395 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tabela — Kamihime First Release Dates</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kamihime — First Release Dates</title>
+
   <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding: 20px; }
-    table { border-collapse: collapse; width: 100%; max-width: 900px; }
-    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; vertical-align: top; }
-    th { background: #f6f6f6; font-weight: 600; }
-    tr:nth-child(even) { background: #fbfbfb; }
-    caption { caption-side: top; text-align: left; font-size: 1.1em; margin-bottom: 8px; font-weight: 600; }
-    .note { font-size: 0.9em; color: #444; margin-top: 12px; max-width: 900px; }
+    /* =======================
+       ROOT / THEME
+    ======================= */
+    :root {
+      --bg-gradient: radial-gradient(1200px 600px at 10% 10%, #1b1f3b 0%, #0b0e1a 45%, #05060c 100%);
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --text-primary: #f5f7ff;
+      --text-secondary: #b9c0ff;
+      --accent: #7aa2ff;
+      --accent-soft: rgba(122, 162, 255, 0.25);
+      --danger: #ff6b6b;
+      --success: #4cd964;
+      --warning: #ffcc00;
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.35);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --blur: blur(14px);
+      --transition: 0.25s ease;
+    }
+
+    /* =======================
+       BASE
+    ======================= */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.4px;
+    }
+
+    p.subtitle {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* =======================
+       LAYOUT
+    ======================= */
+    .app-container {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 24px;
+    }
+
+    /* =======================
+       CONTROLS
+    ======================= */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-box {
+      flex: 1 1 240px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px 10px 38px;
+      color: var(--text-primary);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-soft);
+    }
+
+    .search-box span {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.7;
+    }
+
+    .sort-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .sort-buttons button {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      padding: 8px 14px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sort-buttons button:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .sort-buttons button.active {
+      background: var(--accent);
+      color: #0b0e1a;
+      border-color: var(--accent);
+    }
+
+    /* =======================
+       TABLE (PREMIUM)
+    ======================= */
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      min-width: 720px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      padding: 0 14px 8px 14px;
+      cursor: pointer;
+    }
+
+    tbody tr {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+
+    tbody tr:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+      background: rgba(0,0,0,0.45);
+    }
+
+    tbody td {
+      padding: 14px;
+      vertical-align: middle;
+    }
+
+    tbody tr td:first-child {
+      border-radius: var(--radius-md) 0 0 var(--radius-md);
+    }
+
+    tbody tr td:last-child {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    /* =======================
+       BADGES
+    ======================= */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge.success {
+      background: rgba(76, 217, 100, 0.2);
+      color: var(--success);
+    }
+
+    .badge.warning {
+      background: rgba(255, 204, 0, 0.2);
+      color: var(--warning);
+    }
+
+    .badge.danger {
+      background: rgba(255, 107, 107, 0.2);
+      color: var(--danger);
+    }
+
+    /* =======================
+       FOOTER NOTE
+    ======================= */
+    .footer-note {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-note a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer-note a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <table>
-    <caption>Kamihime — First Release Date (base release, não HAW)</caption>
-    <thead>
-      <tr>
-        <th>Kamihime</th>
-        <th>First Release Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Amaterasu</td>
-        <td>1 Jan 2018 (<a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" title="Module:Kamihime Database | Kamihime Project Wiki | Fandom" target="_blank" rel="noopener noreferrer">kamihime-project.fandom.com</a>)</td>
-      </tr>
-      <tr>
-        <td>Artemis</td>
-        <td>1 Jan 2020 (<a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" title="Module:Kamihime Database | Kamihime Project Wiki | Fandom" target="_blank" rel="noopener noreferrer">kamihime-project.fandom.com</a>)</td>
-      </tr>
-      <tr>
-        <td>Amon</td>
-        <td>30 Mar 2019 (<a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" title="Module:Kamihime Database | Kamihime Project Wiki | Fandom" target="_blank" rel="noopener noreferrer">kamihime-project.fandom.com</a>)</td>
-      </tr>
-      <tr>
-        <td>Asherah</td>
-        <td>20 Apr 2018 (<a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" title="Module:Kamihime Database | Kamihime Project Wiki | Fandom" target="_blank" rel="noopener noreferrer">kamihime-project.fandom.com</a>)</td>
-      </tr>
-      <tr>
-        <td>Nike</td>
-        <td>30 Mar 2017 (<a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" title="Module:Kamihime Database | Kamihime Project Wiki | Fandom" target="_blank" rel="noopener noreferrer">kamihime-project.fandom.com</a>)</td>
-      </tr>
-      <tr>
-        <td>Cybele</td>
-        <td>30 Mar 2017 (<a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" title="Module:Kamihime Database | Kamihime Project Wiki | Fandom" target="_blank" rel="noopener noreferrer">kamihime-project.fandom.com</a>)</td>
-      </tr>
-      <tr>
-        <td>Baal</td>
-        <td>30 Mar 2017 (<a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" title="Module:Kamihime Database | Kamihime Project Wiki | Fandom" target="_blank" rel="noopener noreferrer">kamihime-project.fandom.com</a>)</td>
-      </tr>
-      <tr>
-        <td>Cu Chulainn</td>
-        <td><strong>(I did <em>not</em> find a reliable “first release date” entry in the public database for the original — only for his HAW version)</strong></td>
-      </tr>
-      <tr>
-        <td>Justitia</td>
-        <td>7 Feb 2019 (<a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" title="Module:Kamihime Database | Kamihime Project Wiki | Fandom" target="_blank" rel="noopener noreferrer">kamihime-project.fandom.com</a>)</td>
-      </tr>
-      <tr>
-        <td>Vishnu</td>
-        <td><strong>I did <em>not</em> find a confirmed “first release date” for Vishnu in the publicly available database entries.</strong></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="app-container">
 
-  <p class="note">
-    Fonte: <a href="https://kamihime-project.fandom.com/wiki/Module%3AKamihime_Database?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">Module:Kamihime Database | Kamihime Project Wiki | Fandom</a>
-  </p>
+    <header class="glass-panel">
+      <h1>Kamihime — First Release Dates</h1>
+      <p class="subtitle">
+        📅 Datas de lançamento base (não HAW) • Fonte comunitária
+      </p>
+    </header>
+
+    <section class="glass-panel controls">
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" id="searchInput" placeholder="Buscar Kamihime..." />
+      </div>
+
+      <div class="sort-buttons">
+        <button id="sortName" class="active">Nome ⬍</button>
+        <button id="sortDate">Data ⬍</button>
+      </div>
+    </section>
+
+    <section class="glass-panel table-wrapper">
+      <table id="kamihimeTable">
+        <thead>
+          <tr>
+            <th data-key="name">Kamihime</th>
+            <th data-key="date">First Release Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Amaterasu</td>
+            <td data-date="2018-01-01">1 Jan 2018</td>
+            <td><span class="badge success">✔ Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Artemis</td>
+            <td data-date="2020-01-01">1 Jan 2020</td>
+            <td><span class="badge success">✔ Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Amon</td>
+            <td data-date="2019-03-30">30 Mar 2019</td>
+            <td><span class="badge success">✔ Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Asherah</td>
+            <td data-date="2018-04-20">20 Apr 2018</td>
+            <td><span class="badge success">✔ Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Nike</td>
+            <td data-date="2017-03-30">30 Mar 2017</td>
+            <td><span class="badge success">✔ Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Cybele</td>
+            <td data-date="2017-03-30">30 Mar 2017</td>
+            <td><span class="badge success">✔ Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Baal</td>
+            <td data-date="2017-03-30">30 Mar 2017</td>
+            <td><span class="badge success">✔ Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Cu Chulainn</td>
+            <td>—</td>
+            <td><span class="badge warning">⚠ Unconfirmed</span></td>
+          </tr>
+          <tr>
+            <td>Justitia</td>
+            <td data-date="2019-02-07">7 Feb 2019</td>
+            <td><span class="badge success">✔ Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Vishnu</td>
+            <td>—</td>
+            <td><span class="badge danger">✖ Missing</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="glass-panel footer-note">
+      Fonte principal:
+      <a href="https://kamihime-project.fandom.com/wiki/Module:Kamihime_Database" target="_blank" rel="noopener noreferrer">
+        Module:Kamihime Database — Kamihime Project Wiki
+      </a>
+    </footer>
+
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const table = document.getElementById("kamihimeTable");
+    const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+    const sortNameBtn = document.getElementById("sortName");
+    const sortDateBtn = document.getElementById("sortDate");
+
+    let nameAsc = true;
+    let dateAsc = true;
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      rows.forEach(row => {
+        const name = row.children[0].textContent.toLowerCase();
+        row.style.display = name.includes(query) ? "" : "none";
+      });
+    });
+
+    sortNameBtn.addEventListener("click", () => {
+      nameAsc = !nameAsc;
+      sortRows((a, b) => {
+        const n1 = a.children[0].textContent;
+        const n2 = b.children[0].textContent;
+        return nameAsc ? n1.localeCompare(n2) : n2.localeCompare(n1);
+      });
+      setActive(sortNameBtn);
+    });
+
+    sortDateBtn.addEventListener("click", () => {
+      dateAsc = !dateAsc;
+      sortRows((a, b) => {
+        const d1 = a.children[1].dataset.date || "";
+        const d2 = b.children[1].dataset.date || "";
+        return dateAsc ? d1.localeCompare(d2) : d2.localeCompare(d1);
+      });
+      setActive(sortDateBtn);
+    });
+
+    function sortRows(compareFn) {
+      const tbody = table.querySelector("tbody");
+      rows.sort(compareFn).forEach(row => tbody.appendChild(row));
+    }
+
+    function setActive(button) {
+      [sortNameBtn, sortDateBtn].forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+    }
+  </script>
 
 </body>
 </html>

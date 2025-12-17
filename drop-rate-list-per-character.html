@@ -1,206 +1,361 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<title>Kamihime Project – Drop Rate↑ (Tabelas Separadas)</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kamihime Project — Drop Rate↑ (Tabelas Separadas)</title>
+
 <style>
-body { font-family: Arial, sans-serif; background:#f5f7fa; padding:26px; color:#1e293b; }
-h1, h2 { margin-top:0; }
-table { width:100%; border-collapse:collapse; margin:20px 0; background:#fff; }
-th, td { padding:10px; border-bottom:1px solid #e2e8f0; font-size:14px; }
-th { background:#e2e8f0; }
-a { color:#2563eb; text-decoration:none; }
-a:hover { text-decoration:underline; }
-.section { margin-top:40px; padding-top:20px; border-top:3px solid #cbd5e1; }
+:root {
+  --bg-gradient: linear-gradient(135deg, #0b1020, #0f172a 55%, #020617);
+  --glass-bg: rgba(255,255,255,0.08);
+  --glass-border: rgba(255,255,255,0.18);
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --accent: #38bdf8;
+  --radius: 18px;
+  --blur: blur(14px);
+  --shadow: 0 18px 40px rgba(0,0,0,0.45);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  line-height: 1.65;
+}
+
+header {
+  padding: 56px 24px 36px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.6rem;
+  letter-spacing: 0.6px;
+}
+
+header p {
+  max-width: 880px;
+  margin: 14px auto 0;
+  color: var(--text-muted);
+}
+
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  gap: 48px;
+}
+
+.section {
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.section-header span {
+  font-size: 1.9rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+thead th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+tbody tr {
+  transition: background 0.25s ease;
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+td {
+  padding: 14px 16px;
+  vertical-align: top;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.badge-soul { background: rgba(148,163,184,0.25); }
+.badge-kami { background: rgba(56,189,248,0.25); }
+.badge-eido { background: rgba(168,85,247,0.25); }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  padding: 40px 16px 56px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
 </style>
 </head>
 
 <body>
-<h1>Kamihime Project – Tabelas Separadas de Personagens com <em>Drop Rate↑</em></h1>
-<p>As tabelas abaixo dividem os personagens por tipo específico de skill que aplica Item Drop Rate↑.</p>
+
+<header>
+  <h1>Kamihime Project — Drop Rate↑</h1>
+  <p>
+    Tabelas separadas por tipo de habilidade que aplicam
+    <strong>Item Drop Rate↑</strong>, incluindo Kamihimes, Souls e Eidolons.
+  </p>
+</header>
+
+<main>
 
 <!-- SNATCH -->
-<div class="section">
-<h2>1. Skills: <em>Snatch</em></h2>
-<table>
-<thead>
-<tr>
-<th>Personagem</th>
-<th>Tipo</th>
-<th>Habilidade(s)</th>
-<th>Stacks / Detalhes</th>
-</tr>
-</thead>
-<tbody>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/D%27Artagnan" target="_blank">D'Artagnan</a></td>
-<td>Soul</td>
-<td>Snatch / Snatch 2nd / Snatch 3rd / Snatch EX</td>
-<td>1–3 stacks (EX aplica ×3 em todos os inimigos)</td>
-</tr>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Granuaile" target="_blank">Granuaile</a></td>
-<td>Soul</td>
-<td>Snatch 2nd</td>
-<td>Aplica 2 stacks</td>
-</tr>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Billy_the_Kid" target="_blank">Billy the Kid</a></td>
-<td>Soul</td>
-<td>Snatch</td>
-<td>1 stack</td>
-</tr>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Caspar" target="_blank">Caspar</a></td>
-<td>Soul</td>
-<td>Snatch Dx</td>
-<td>Aplica Drop Rate↑ 15 vezes (máx 9 por inimigo)</td>
-</tr>
-
-</tbody>
-</table>
-</div>
+<section class="section">
+  <div class="section-header">
+    <span>🎯</span>
+    <h2>1. Skills — Snatch</h2>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Unidade</th>
+          <th>Tipo</th>
+          <th>Skill(s)</th>
+          <th>Stacks / Detalhes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/D%27Artagnan" target="_blank">D'Artagnan</a></td>
+          <td><span class="badge badge-soul">Soul</span></td>
+          <td>Snatch / 2nd / 3rd / EX</td>
+          <td>1–3 stacks (EX aplica ×3 em área)</td>
+        </tr>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Granuaile" target="_blank">Granuaile</a></td>
+          <td><span class="badge badge-soul">Soul</span></td>
+          <td>Snatch 2nd</td>
+          <td>Aplica 2 stacks</td>
+        </tr>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Billy_the_Kid" target="_blank">Billy the Kid</a></td>
+          <td><span class="badge badge-soul">Soul</span></td>
+          <td>Snatch</td>
+          <td>1 stack</td>
+        </tr>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Caspar" target="_blank">Caspar</a></td>
+          <td><span class="badge badge-soul">Soul</span></td>
+          <td>Snatch Dx</td>
+          <td>15 aplicações (máx 9 por alvo)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
 <!-- SCROUNGE -->
-<div class="section">
-<h2>2. Skills: <em>Scrounge / More Please</em></h2>
-<table>
-<thead>
-<tr>
-<th>Personagem</th>
-<th>Tipo</th>
-<th>Habilidade(s)</th>
-<th>Stacks / Detalhes</th>
-</tr>
-</thead>
-<tbody>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Skuld" target="_blank">Skuld (todas versões)</a></td>
-<td>Kamihime</td>
-<td>Scrounge / More Please</td>
-<td>1–2 stacks dependendo da versão</td>
-</tr>
-
-</tbody>
-</table>
-</div>
+<section class="section">
+  <div class="section-header">
+    <span>🧺</span>
+    <h2>2. Skills — Scrounge / More Please</h2>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Unidade</th>
+          <th>Tipo</th>
+          <th>Skill(s)</th>
+          <th>Stacks / Detalhes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Skuld" target="_blank">Skuld (todas versões)</a></td>
+          <td><span class="badge badge-kami">Kamihime</span></td>
+          <td>Scrounge / More Please</td>
+          <td>1–2 stacks conforme versão</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
 <!-- MASSPRO -->
-<div class="section">
-<h2>3. Skills: <em>Masspro Curement / Glance of Streak</em></h2>
-<table>
-<thead>
-<tr>
-<th>Personagem</th>
-<th>Tipo</th>
-<th>Habilidade(s)</th>
-<th>Stacks / Detalhes</th>
-</tr>
-</thead>
-<tbody>
+<section class="section">
+  <div class="section-header">
+    <span>🌊</span>
+    <h2>3. Skills — Masspro Curement / Glance of Streak</h2>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Unidade</th>
+          <th>Tipo</th>
+          <th>Skill(s)</th>
+          <th>Stacks / Detalhes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Zabaniya" target="_blank">Zabaniya</a></td>
+          <td><span class="badge badge-kami">Kamihime</span></td>
+          <td>Masspro Curement / Glance of Streak</td>
+          <td>Aplica Drop Rate↑ em área</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Zabaniya" target="_blank">Zabaniya</a></td>
-<td>Kamihime</td>
-<td>Masspro Curement / Glance of Streak</td>
-<td>Aplica Drop Rate↑ a todos os inimigos (varia por versão)</td>
-</tr>
-
-</tbody>
-</table>
-</div>
-
-<!-- LEXPLANDER -->
-<div class="section">
-<h2>4. Skills: <em>Lexplander / Aurum / Guilding Current</em> (Mammon)</h2>
-<table>
-<thead>
-<tr>
-<th>Personagem</th>
-<th>Tipo</th>
-<th>Habilidade(s)</th>
-<th>Stacks / Detalhes</th>
-</tr>
-</thead>
-<tbody>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Mammon" target="_blank">Mammon (Awakened + Variantes)</a></td>
-<td>Kamihime</td>
-<td>Lexplander / Lexplander+ / Lexplander++ / Aurum Radius / Aurum Dolce / Guilding Current</td>
-<td>1–4 stacks; burst e passiva também aplicam Drop Rate↑</td>
-</tr>
-
-</tbody>
-</table>
-</div>
+<!-- MAMMON -->
+<section class="section">
+  <div class="section-header">
+    <span>⚡</span>
+    <h2>4. Skills — Lexplander / Aurum / Guilding</h2>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Unidade</th>
+          <th>Tipo</th>
+          <th>Skill(s)</th>
+          <th>Stacks / Detalhes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Mammon" target="_blank">Mammon (Awakened & Variantes)</a></td>
+          <td><span class="badge badge-kami">Kamihime</span></td>
+          <td>Lexplander / + / ++ / Aurum Radius / Aurum Dolce / Guilding Current</td>
+          <td>1–4 stacks; burst e passiva aplicam bônus</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
 <!-- SPECIAL -->
-<div class="section">
-<h2>5. Skills Especiais: <em>Temble Notice, Menoides Rapid</em> etc.</h2>
-<table>
-<thead>
-<tr>
-<th>Personagem</th>
-<th>Tipo</th>
-<th>Habilidade(s)</th>
-<th>Stacks / Detalhes</th>
-</tr>
-</thead>
-<tbody>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Selene" target="_blank">Selene</a></td>
-<td>Kamihime</td>
-<td>Temble Notice+ / Menoides Rapid</td>
-<td>Temble Notice+ aplica 3 stacks; outras skills garantem aplicação</td>
-</tr>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Genie_Crescent_Heel" target="_blank">Genie Crescent Heel</a></td>
-<td>Soul</td>
-<td>Burst Effect ★4</td>
-<td>Aplica Drop Rate↑ ao usar burst</td>
-</tr>
-
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Treasure_Sword_Crusos" target="_blank">Treasure Sword Crusos</a></td>
-<td>Soul</td>
-<td>Burst Effect</td>
-<td>Drop Rate↑ dependendo da raridade</td>
-</tr>
-
-</tbody>
-</table>
-</div>
+<section class="section">
+  <div class="section-header">
+    <span>🌑</span>
+    <h2>5. Skills Especiais</h2>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Unidade</th>
+          <th>Tipo</th>
+          <th>Skill(s)</th>
+          <th>Stacks / Detalhes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Selene" target="_blank">Selene</a></td>
+          <td><span class="badge badge-kami">Kamihime</span></td>
+          <td>Temble Notice+ / Menoides Rapid</td>
+          <td>Temble Notice+ aplica 3 stacks</td>
+        </tr>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Genie_Crescent_Heel" target="_blank">Genie Crescent Heel</a></td>
+          <td><span class="badge badge-soul">Soul</span></td>
+          <td>Burst Effect ★4</td>
+          <td>Aplica Drop Rate↑ após burst</td>
+        </tr>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Treasure_Sword_Crusos" target="_blank">Treasure Sword Crusos</a></td>
+          <td><span class="badge badge-soul">Soul</span></td>
+          <td>Burst Effect</td>
+          <td>Drop Rate↑ conforme raridade</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
 <!-- EIDOLONS -->
-<div class="section">
-<h2>6. Eidolons com Drop Rate↑</h2>
-<table>
-<thead>
-<tr>
-<th>Eidolon</th>
-<th>Habilidade</th>
-<th>Detalhes</th>
-</tr>
-</thead>
-<tbody>
+<section class="section">
+  <div class="section-header">
+    <span>🐉</span>
+    <h2>6. Eidolons</h2>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Eidolon</th>
+          <th>Skill</th>
+          <th>Detalhes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://kamihime-project.fandom.com/wiki/Och" target="_blank">Och</a></td>
+          <td>Haos Diaititis</td>
+          <td>Aumenta Drop Rate↑ conforme ★ e limite</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-<tr>
-<td><a href="https://kamihime-project.fandom.com/wiki/Och" target="_blank">Och</a></td>
-<td>Haos Diaititis (Eidolon Effect)</td>
-<td>Aumenta Drop Rate↑ conforme estrelas e limite</td>
-</tr>
+</main>
 
-</tbody>
-</table>
-</div>
+<footer>
+  Dados compilados a partir do Kamihime Project Wiki — Drop Rate↑
+</footer>
 
 </body>
 </html>
